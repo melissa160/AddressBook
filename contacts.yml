@@ -1,0 +1,44 @@
+---
+- !ruby/object:Contact
+  phone_numbers:
+  - !ruby/object:PhoneNumber
+    kind: home
+    number: '3333'
+  addresses: []
+  first_name: meli
+  middle_name: ''
+  last_name: rami
+- !ruby/object:Contact
+  phone_numbers:
+  - !ruby/object:PhoneNumber
+    kind: home
+    number: '3216666'
+  addresses:
+  - !ruby/object:Address
+    kind: home
+    street_1: ''
+    street_2: ''
+    city: ''
+    state: ''
+    postal_code: '1'
+  first_name: carlos
+  middle_name: javier
+  last_name: perez
+- !ruby/object:Contact
+  phone_numbers:
+  - !ruby/object:PhoneNumber
+    kind: home
+    number: '321693356'
+  addresses: []
+  first_name: andres
+  middle_name: felipe
+  last_name: sarria
+- !ruby/object:Contact
+  phone_numbers:
+  - !ruby/object:PhoneNumber
+    kind: home
+    number: '3216961636'
+  addresses: []
+  first_name: serena
+  middle_name: andrea
+  last_name: williams
