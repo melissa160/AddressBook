@@ -7,6 +7,78 @@ class AddressBook
 		@contacts = []
 	end
 
+	def run
+		loop do
+			puts "ADDRESS BOOK MENU"
+			puts "a: Add Contact"
+			puts "p: Print Address Book"
+			puts "s: Search"
+			puts "e: Exit"
+			print "Enter your choice: "
+			input = gets.chomp.downcase
+			case input
+			when 'a'
+				add_contact
+			when 'p'
+				print_contact_list
+			when 's'
+				print "Search term: "
+				search = gets.chomp
+				find_by_name(search)
+				find_by_phone_number(search)
+			when 'e'
+				break
+			end
+		end
+	end
+
+	def add_contact
+		contact = Contact.new
+		print "First Name: "
+		contact.first_name = gets.chomp
+		print "Middle Name: "
+		contact.middle_name = gets.chomp
+		print "Last Name: "
+		contact.last_name = gets.chomp
+
+		loop do
+			puts "Add phone number or address"
+			puts "p: Add phone number"
+			puts "a: Add address"
+			puts "Any other key to go back"
+			response = gets.chomp.downcase
+			case response
+			when 'p'
+				phone = PhoneNumber.new
+				print "Phone number kind (home, work, etc): "
+				phone.kind = gets.chomp
+				print "Phone number: "
+				phone.number = gets.chomp
+				contact.phone_numbers.push(phone)
+			when 'a'
+				address = Address.new
+				print "Address kind (home, work, etc): "
+				address.kind = gets.chomp
+				print "Address street 1: "
+				address.street_1 = gets.chomp
+				print "Address street 2: "
+				address.street_2 = gets.chomp
+				print "Address City: "
+				address.city = gets.chomp
+				print "Address State: "
+				address.state = gets.chomp
+				print "Address postasl code: "
+				address.postal_code = gets.chomp
+				contact.addresses.push(address)
+			else
+				print "\n"
+				break
+
+			end
+		end
+		contacts.push(contact)
+	end
+
 	def find_by_name(name)
 		results = []
 		search = name.downcase
@@ -51,28 +123,4 @@ class AddressBook
 end
 
 address_book = AddressBook.new
-
-melissa =  Contact.new
-melissa.first_name = "Melissa"
-melissa.middle_name = "carolina"
-melissa.last_name = "Ramirez"
-melissa.add_phone_number("Home", "3772016")
-melissa.add_phone_number("Celphone", "320161648")
-melissa.add_address("Home", "94", "202", "Bogota", "Colombia", "100221")
-
-carlos = Contact.new
-carlos.first_name = "Carlos"
-carlos.last_name = "Holmes"
-carlos.add_phone_number("Home", "8888888")
-carlos.add_phone_number("Celphone", "320161648")
-carlos.add_address("Home", "calle 12", "202", "Bogota", "Colombia", "100221")
-
-
-address_book.contacts.push(melissa)
-address_book.contacts.push(carlos)
-
-#address_book.print_contact_list
-
-#address_book.find_by_name('RAMI')
-
-address_book.find_by_phone_number("320")
+address_book.run
