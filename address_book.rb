@@ -17,9 +17,25 @@ class AddressBook
 
 	def save
 		File.open("contacts.yml", "w") do |file|
-			#file.write(contacts.to_yaml)
+			#file.write(contacts.to_yaml)---this is another way for do the same
 			file.write(YAML.dump(contacts))
 		end
+	end
+
+	def remove
+		print "Write the name or last name to remove: "
+		remove_title = gets.chomp
+		delete_contact(remove_title)
+
+	end
+
+	def delete_contact(remove_title)
+		contacts.each do |contact|
+			if contact.full_name.downcase.include?(remove_title)
+				contacts.delete(contact)
+			end
+		end
+		save
 	end
 
 	def run
@@ -28,6 +44,7 @@ class AddressBook
 			puts "a: Add Contact"
 			puts "p: Print Address Book"
 			puts "s: Search"
+			puts "r: Remove"
 			puts "e: Exit"
 			print "Enter your choice: "
 			input = gets.chomp.downcase
@@ -41,6 +58,8 @@ class AddressBook
 				search = gets.chomp
 				find_by_name(search)
 				find_by_phone_number(search)
+			when 'r'
+				remove()
 			when 'e'
 				save()
 				break
